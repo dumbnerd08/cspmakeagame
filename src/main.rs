@@ -32,7 +32,7 @@ pub async fn run() {
     } else {
         println!("loading from web");
         three_d_asset::io::load_async(&[
-            "http://localhost:8000/space.hdr",])
+            "http://localhost/space.hdr",])
             .await
             .expect("this is an error message")
     };

@@ -19,5 +19,5 @@ app.get("/space.hdr", function (req, res) {
 
 app.listen(8080, function (err) {
 	if (err) console.error(err);
-	console.log("listening on port 8000");
+	console.log("listening on port 8080");
 });
