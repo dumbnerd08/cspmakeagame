@@ -8,7 +8,7 @@ async fn main() {
 
 pub async fn run() {
     let window = Window::new(WindowSettings {
-        title: "AMOGUS".to_string(),
+        title: "".to_string(),
         max_size: Some((1280, 720)),
          ..Default::default()
     })
@@ -23,7 +23,11 @@ pub async fn run() {
         0.1,
         10000.0,
     );
-    let mut control = FirstPersonControl::new(0.1);
+    let mut control = OrbitControl::new(
+        *camera.target(),
+        0.5*camera.target().distance(*camera.position()),
+        5.0*camera.target().distance(*camera.position()),
+    );
 
     let mut loaded = if let Ok(loaded) = three_d_asset::io::load_async(&[
         "/home/teo/cspmakeagame/assets/space.hdr"]).await
