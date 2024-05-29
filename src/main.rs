@@ -30,13 +30,13 @@ pub async fn run() {
     );
 
     let mut loaded = if let Ok(loaded) = three_d_asset::io::load_async(&[
-        "/home/teo/cspmakeagame/assets/space.hdr"]).await
+        "/src/space.hdr"]).await
     {
         loaded
     } else {
         println!("loading from web");
         three_d_asset::io::load_async(&[
-            "http://localhost/space.hdr"])
+            "https://www.spacespheremaps.com/wp-content/uploads/earthlike_planet.hdr"])
             .await
             .expect("this is an error message")
     };
