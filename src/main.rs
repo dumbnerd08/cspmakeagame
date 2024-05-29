@@ -16,27 +16,24 @@ pub async fn run() {
     let context = window.gl();
     let mut camera = Camera::new_perspective(
         window.viewport(),
-        vec3(-600.0, 600.0, 600.0),
+        vec3(3.0, 1.0, 2.5),
         vec3(0.0, 0.0, 0.0),
         vec3(0.0, 1.0, 0.0),
         degrees(45.0),
         0.1,
-        10000.0,
+        1000.0,
     );
     let mut control = OrbitControl::new(
-        *camera.target(),
-        0.5*camera.target().distance(*camera.position()),
-        5.0*camera.target().distance(*camera.position()),
-    );
+        *camera.target(), 1.0, 100.0);
 
     let mut loaded = if let Ok(loaded) = three_d_asset::io::load_async(&[
-        "/src/space.hdr"]).await
+        "http://3.145.210.166/src/space.hdr"]).await
     {
         loaded
     } else {
-        println!("loading from web");
+        println!("loading from web if CORS is available");
         three_d_asset::io::load_async(&[
-            "https://www.spacespheremaps.com/wp-content/uploads/earthlike_planet.hdr"])
+            "https://www.spacespheremaps.com/wp-content/uploads/HDR_subdued_multi_nebulae.hdr"])
             .await
             .expect("this is an error message")
     };
