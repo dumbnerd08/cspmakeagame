@@ -1,9 +1,11 @@
 #!/usr/bin/bash
-#60 images
-for i in {1..60}
+text=$(docker image list)
+search="IMAGE ID"
+rest=${text#*$search}
+index=$(( ${#text} - ${#rest} - ${#search} ))
+higherIndex=$(( $index + 11 ))
+num=$(docker image list | grep ago | cut -c $index-$higherIndex)
+for i in $num
 do
-	docker image rm $(docker image list | grep ago | cut -c 42-53 | sed -n $i'p')
+        docker image rm $i
 done
-ids=$(docker image list | grep ago | cut -c 42-53 | sed -n '60p')
-
-echo $ids
